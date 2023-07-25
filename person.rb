@@ -4,6 +4,7 @@ class Person
 
   def initialize(age, parent_permission: true, name: 'Unknown')
     @id = Random.rand(1..10_000)
+    @parent_permission = parent_permission
     @age = age
     @name = name
   end
