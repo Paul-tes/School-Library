@@ -38,3 +38,12 @@ puts "Teacher age: #{teacher1.age}"
 
 # Check if the teacher can use services
 puts "Can teacher use services? #{teacher1.can_use_services?}"
+
+# -----------------------DECORATOR---------------------------------
+
+person = Person.new(22, name: 'maximilianus')
+person.correct_name
+capitalized_person = CapitalizeDecorator.new(person)
+puts capitalized_person.correct_name
+capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+puts capitalized_trimmed_person.correct_name
