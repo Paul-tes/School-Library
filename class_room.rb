@@ -5,9 +5,4 @@ class ClassRoom
     @label = lable
     @students = []
   end
-
-  def add_student(student)
-    @students << student
-    student.classroom = self
-  end
 end

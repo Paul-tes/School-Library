@@ -55,14 +55,19 @@ puts capitalized_trimmed_person.correct_name
 # ------------------------------ASSOCIATIONS------------------------------------
 puts '------------------------------ASSOCIATIONS------------------------------------'
 
-student1 = Student.new(16, name: 'John')
-student2 = Student.new(17, name: 'Jane')
-classroom1 = ClassRoom.new('Math')
-classroom1.add_student(student1)
-classroom1.add_student(student2)
+# Create a new classroom
+classroom1 = ClassRoom.new('History')
 
-puts "A #{student1.name} is belongs to in #{classroom1.label} class."
-puts "A #{student2.name} is belongs to in #{classroom1.label} class."
+# Create a new student
+student1 = Student.new(16, name: 'John Doe')
+
+# Assign the student to the classroom
+student1.classroom = classroom1
+
+# Check that the student has been added to the classroom's students
+puts classroom1.students.include?(student1) #=> true
+
+
 
 # Create a new person
 person1 = Person.new(25, name: 'John')
