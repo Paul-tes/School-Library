@@ -51,3 +51,25 @@ capitalized_person = CapitalizeDecorator.new(person)
 puts capitalized_person.correct_name
 capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
 puts capitalized_trimmed_person.correct_name
+
+# ------------------------------ASSOCIATIONS------------------------------------
+puts '------------------------------ASSOCIATIONS------------------------------------'
+
+student1 = Student.new(16, name: 'John')
+student2 = Student.new(17, name: 'Jane')
+classroom1 = ClassRoom.new('Math')
+classroom1.add_student(student1)
+classroom1.add_student(student2)
+
+puts "A #{student1.name} is belongs to in #{classroom1.label} class."
+puts "A #{student2.name} is belongs to in #{classroom1.label} class."
+
+person1 = Person.new(25, name: 'John')
+person2 = Person.new(17, parent_permission: true, name: 'Jane')
+book1 = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+book2 = Book.new('To Kill a Mockingbird', 'Harper Lee')
+rental1 = Rental.new(Date.today, book1, person1)
+rental2 = Rental.new(Date.today, book2, person2)
+
+puts "A person #{person1.name} rents '#{book1.title}' at #{rental1.date}"
+puts "A person #{person2.name} rents '#{book2.title}' at #{rental2.date}"
