@@ -67,8 +67,6 @@ student1.classroom = classroom1
 # Check that the student has been added to the classroom's students
 puts classroom1.students.include?(student1) #=> true
 
-
-
 # Create a new person
 person1 = Person.new(25, name: 'John')
 
