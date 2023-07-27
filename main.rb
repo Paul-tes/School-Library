@@ -64,12 +64,15 @@ classroom1.add_student(student2)
 puts "A #{student1.name} is belongs to in #{classroom1.label} class."
 puts "A #{student2.name} is belongs to in #{classroom1.label} class."
 
+# Create a new person
 person1 = Person.new(25, name: 'John')
-person2 = Person.new(17, parent_permission: true, name: 'Jane')
-book1 = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
-book2 = Book.new('To Kill a Mockingbird', 'Harper Lee')
-rental1 = Rental.new(Date.today, book1, person1)
-rental2 = Rental.new(Date.today, book2, person2)
 
-puts "A person #{person1.name} rents '#{book1.title}' at #{rental1.date}"
-puts "A person #{person2.name} rents '#{book2.title}' at #{rental2.date}"
+# Create a new book
+book1 = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+
+# Add a rental for the person and book
+rental1 = book1.add_rental(person1, '2023-07-27')
+
+# Check that the rental has been added to the book's rentals and the person's rentals
+puts book1.rentals.include?(rental1)
+puts person1.rentals.include?(rental1)
