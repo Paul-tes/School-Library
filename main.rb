@@ -1,6 +1,10 @@
 require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'book'
+require_relative 'rental'
+require_relative 'class_room'
+require 'date'
 
 # Create a Person object with default values
 person1 = Person.new(25)
@@ -17,7 +21,7 @@ puts "Person age: #{person1.age}"
 puts "Can person use services? #{person1.can_use_services?}"
 
 # Create a Student object with a classroom
-student1 = Student.new(18, 'Math')
+student1 = Student.new(18, name: 'Math')
 
 # Print the student's ID, name, age, and classroom
 puts "Student name: #{student1.name}"
@@ -47,3 +51,31 @@ capitalized_person = CapitalizeDecorator.new(person)
 puts capitalized_person.correct_name
 capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
 puts capitalized_trimmed_person.correct_name
+
+# ------------------------------ASSOCIATIONS------------------------------------
+puts '------------------------------ASSOCIATIONS------------------------------------'
+
+# Create a new classroom
+classroom1 = ClassRoom.new('History')
+
+# Create a new student
+student1 = Student.new(16, name: 'John Doe')
+
+# Assign the student to the classroom
+student1.classroom = classroom1
+
+# Check that the student has been added to the classroom's students
+puts classroom1.students.include?(student1) #=> true
+
+# Create a new person
+person1 = Person.new(25, name: 'John')
+
+# Create a new book
+book1 = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+
+# Add a rental for the person and book
+rental1 = book1.add_rental(person1, '2023-07-27')
+
+# Check that the rental has been added to the book's rentals and the person's rentals
+puts book1.rentals.include?(rental1)
+puts person1.rentals.include?(rental1)
