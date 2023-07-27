@@ -1,6 +1,10 @@
 require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'book'
+require_relative 'rental'
+require_relative 'class_room'
+require 'date'
 
 # Create a Person object with default values
 person1 = Person.new(25)
@@ -17,7 +21,7 @@ puts "Person age: #{person1.age}"
 puts "Can person use services? #{person1.can_use_services?}"
 
 # Create a Student object with a classroom
-student1 = Student.new(18, 'Math')
+student1 = Student.new(18, name: 'Math')
 
 # Print the student's ID, name, age, and classroom
 puts "Student name: #{student1.name}"
