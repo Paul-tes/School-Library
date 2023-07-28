@@ -16,3 +16,4 @@ class Store
     @books << book
     puts "#{book.title} Book created successfully"
   end
+end

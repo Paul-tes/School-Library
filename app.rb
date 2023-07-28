@@ -1,6 +1,8 @@
 require_relative 'store'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'book'
+
 class App
   attr_accessor :store
 
@@ -33,7 +35,9 @@ class App
   end
 
   def all_books
-    puts 'books'
+    @store.books.each do |book|
+      puts "Title: \"#{book.title}\", Author: #{book.author}"
+    end
   end
 
   def all_peoples
@@ -64,11 +68,16 @@ class App
   end
 
   def create_book
-    puts 'create books'
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    book = Book.new(title, author)
+    @store.add_book(book)
   end
 
   def create_rental
-    puts 'create rental'
+    'create rental'
   end
 
   def get_rental_for_person(id)
