@@ -1,4 +1,24 @@
+require_relative 'store'
+require_relative 'student'
+require_relative 'teacher'
 class App
+  attr_accessor :store
+
+  def initialize
+    @store = Store.new
+  end
+
+  def run
+    @exit = false
+    until @exit
+      display_menu
+      choice = gets.chomp
+      menu_options[choice]&.call || puts('Invalid input. Please try again')
+    end
+  end
+
+  private
+
   def display_menu
     puts 'Welcome to School library App!'
     puts
@@ -13,44 +33,52 @@ class App
   end
 
   def all_books
-    'books'
+    puts 'books'
   end
 
   def all_peoples
-    'peoples'
+    puts 'peoples'
   end
 
   def create_person
-    'teacher or student'
+    print 'Do you want to create a student (1) or a teacher (2) [input the number]: '
+    choice = gets.chomp
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    case choice
+    when '1'
+      print 'Has parent permission? [Y/N]: '
+      permission = gets.chomp.downcase == 'y'
+      person = Student.new(age, parent_permission: permission, name: name)
+    when '2'
+      print 'Specialization: '
+      specialization = gets.chomp
+      person = Teacher.new(age, specialization, name: name)
+    else
+      puts 'Invalid choice'
+      return
+    end
+    @store.add_person(person)
   end
 
   def create_book
-    'create books'
+    puts 'create books'
   end
 
   def create_rental
-    'create rental'
+    puts 'create rental'
   end
 
   def get_rental_for_person(id)
-    "rentals with id #{id}"
+    puts "rentals with id #{id}"
   end
 
   def exit_app?
     puts 'Exiting app ....'
     @exit = true
   end
-
-  def run
-    @exit = false
-    until @exit
-      display_menu
-      choice = gets.chomp
-      menu_options[choice]&.call || puts('Invalid input. Please try again')
-    end
-  end
-
-  private
 
   def menu_options
     {
