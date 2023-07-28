@@ -16,4 +16,9 @@ class Store
     @books << book
     puts "#{book.title} Book created successfully"
   end
+
+  def add_rental(rental)
+    @rentals << rental
+    puts 'Rental created successfully'
+  end
 end
