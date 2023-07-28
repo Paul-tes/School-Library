@@ -1,6 +1,15 @@
 class App
   def menue
-    'menue'
+    puts 'Welcome to School library App!'
+    puts
+    puts 'please choose an option by enterin a number: '
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
   end
 
   def all_books
@@ -28,7 +37,10 @@ class App
   end
 
   def run
-    puts 'Welcome to our library'
-    puts menue
+    loop do
+      puts menue
+      order = gets.chomp
+      break if order == '7'
+    end
   end
 end
