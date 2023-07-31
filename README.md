@@ -126,6 +126,11 @@ N/A
 - GitHub: [@paul-tes](https://github.com/Paul-tes)
 - LinkedIn: [paul](https://www.linkedin.com/in/paul-tesfaye)
 
+👤 **Paul**
+
+- GitHub: [@Theodoraldo](https://github.com/Theodoraldo?tab=repositories)
+- LinkedIn: [Theodoraldo](https://www.linkedin.com/in/theodoreasimeng)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->

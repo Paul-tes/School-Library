@@ -5,22 +5,11 @@ require_relative 'book'
 require_relative 'rental'
 
 class App
-  attr_accessor :store
+  attr_accessor :store, :exit
 
   def initialize
     @store = Store.new
   end
-
-  def run
-    @exit = false
-    until @exit
-      display_menu
-      choice = gets.chomp
-      menu_options[choice]&.call
-    end
-  end
-
-  private
 
   def display_menu
     puts 'Welcome to School library App!'
@@ -34,6 +23,20 @@ class App
     puts '6 - List all rentals for a given person id'
     puts '7 - Exit'
   end
+
+  def menu_options
+    {
+      '1' => method(:all_books),
+      '2' => method(:all_peoples),
+      '3' => method(:create_person),
+      '4' => method(:create_book),
+      '5' => method(:create_rental),
+      '6' => method(:rental_for_person),
+      '7' => method(:exit_app?)
+    }
+  end
+
+  private
 
   def all_books
     @store.books.each do |book|
@@ -115,17 +118,5 @@ class App
   def exit_app?
     puts 'Thank you for using this app!'
     @exit = true
-  end
-
-  def menu_options
-    {
-      '1' => method(:all_books),
-      '2' => method(:all_peoples),
-      '3' => method(:create_person),
-      '4' => method(:create_book),
-      '5' => method(:create_rental),
-      '6' => method(:rental_for_person),
-      '7' => method(:exit_app?)
-    }
   end
 end
