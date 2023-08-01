@@ -13,6 +13,15 @@ class Student < Person
     classroom.students.push(self) unless classroom.students.include?(self)
   end
 
+  def to_hash
+    {
+      type: 'student',
+      age: @age,
+      parent_permission: @parent_permission,
+      name: @name
+    }
+  end
+
   def play_hooky
     '¯\\(ツ)/¯'
   end

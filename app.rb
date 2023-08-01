@@ -116,6 +116,7 @@ class App
   end
 
   def exit_app?
+    @store.save
     puts 'Thank you for using this app!'
     @exit = true
   end
