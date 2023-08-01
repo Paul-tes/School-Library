@@ -54,8 +54,12 @@ class Store
       end
       @people.concat(people_data)
       people_data
-    rescue JSON::ParserError
+    rescue Errno::ENOENT => e
+      puts 'I hope these is your first time. Not data are founded! feel free to create a new person'
+      []
+    rescue JSON::ParserError => e
       puts 'Error parsing JSON file'
+      []
     end
   end
 
@@ -67,23 +71,31 @@ class Store
         Book.new(book['title'], book['author'])
       end
       @books.concat(books_data)
-    rescue JSON::ParserError
+    rescue Errno::ENOENT => e
       puts 'No books are found! feel free to create books in the choice option'
+      []
+    rescue JSON::ParserError
+      puts 'error in parsing'
+      []
     end
   end
 
   def sync_rentals
-    file_path = 'rentas.json'
+    file_path = 'rentals.json'
     begin
       data = JSON.parse(File.read(file_path))
       rentals_data = data.map do |rental|
-        book = Book.new(rental['book']['title'], rental['book']['author'])
+        book = @books.find { |book| book.title == rental['book']['title'] && book.author == rental['book']['author'] }
         person = @people.find { |p| p.age == rental['person']['age'] && p.name == rental['person']['name'] }
         Rental.new(rental['date'], book, person)
       end
       @rentals.concat(rentals_data)
-    rescue JSON::ParserError
+    rescue Errno::ENOENT => e
       puts 'No rentals are found! fell free to create new rentals in the choice option'
+      []
+    rescue JSON::ParserError
+      puts 'Error in parsing'
+      []
     end
   end
 end

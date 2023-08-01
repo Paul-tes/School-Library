@@ -15,7 +15,7 @@ class Book
 
   def to_hash
     {
-      title: @tite,
+      title: @title,
       author: @author
     }
   end
