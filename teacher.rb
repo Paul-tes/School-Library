@@ -9,4 +9,13 @@ class Teacher < Person
   def can_use_services?
     true
   end
+
+  def to_hash
+    {
+      type: 'teacher',
+      age: @age,
+      specialization: @specialization,
+      name: @name
+    }
+  end
 end

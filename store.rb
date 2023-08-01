@@ -1,3 +1,4 @@
+require 'json'
 class Store
   attr_accessor :rentals, :person, :books
 
@@ -20,5 +21,16 @@ class Store
   def add_rental(rental)
     @rentals << rental
     puts 'Rental created successfully'
+  end
+
+  def save
+    rentals_json_data = JSON.generate(rentals.map(&:to_hash))
+    persons_json_data = JSON.generate(person.map(&:to_hash))
+    books_json_data = JSON.generate(books.map(&:to_hash))
+
+    File.write('rentas.json', rentals_json_data)
+    File.write('persons.json', persons_json_data)
+    File.write('books.json', books_json_data)
+    puts 'Data Saved!'
   end
 end
