@@ -1,6 +1,7 @@
 require 'json'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'book'
 
 class Store
   attr_accessor :rentals, :people, :books
@@ -10,6 +11,8 @@ class Store
     @people = []
     @books = []
     sync_persons
+    sync_book
+    sync_rentals
   end
 
   def add_person(person)
@@ -53,11 +56,34 @@ class Store
       people_data
     rescue JSON::ParserError
       puts 'Error parsing JSON file'
-      data = []
     end
   end
-  
+
   def sync_book
     file_path = 'books.json'
+    begin
+      data = JSON.parse(File.read(file_path))
+      books_data = data.map do |book|
+        Book.new(book['title'], book['author'])
+      end
+      @books.concat(books_data)
+    rescue JSON::ParserError
+      puts 'No books are found! feel free to create books in the choice option'
+    end
+  end
+
+  def sync_rentals
+    file_path = 'rentas.json'
+    begin
+      data = JSON.parse(File.read(file_path))
+      rentals_data = data.map do |rental|
+        book = Book.new(rental['book']['title'], rental['book']['author'])
+        person = @people.find { |p| p.age == rental['person']['age'] && p.name == rental['person']['name'] }
+        Rental.new(rental['date'], book, person)
+      end
+      @rentals.concat(rentals_data)
+    rescue JSON::ParserError
+      puts 'No rentals are found! fell free to create new rentals in the choice option'
+    end
   end
 end
