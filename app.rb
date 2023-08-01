@@ -46,7 +46,7 @@ class App
 
   def all_peoples
     puts 'peoples'
-    @store.person.each do |person|
+    @store.people.each do |person|
       type = person.is_a?(Student) ? 'Student' : 'Teacher'
       puts "[#{type}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}]"
     end
