@@ -56,4 +56,8 @@ class Store
       data = []
     end
   end
+  
+  def sync_book
+    file_path = 'books.json'
+  end
 end
