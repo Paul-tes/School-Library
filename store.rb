@@ -44,20 +44,20 @@ class Store
     file_path = 'persons.json'
     begin
       data = JSON.parse(File.read(file_path))
-      people_data = data.map do |person_data|
-        case person_data['type']
+      people_data = data.map do |p_data|
+        case p_data['type']
         when 'student'
-          Student.new(person_data['age'], parent_permission: person_data['parent_permission'], name: person_data['name'])
+          Student.new(p_data['age'], parent_permission: p_data['parent_permission'], name: p_data['name'])
         when 'teacher'
-          Teacher.new(person_data['age'], person_data['specialization'], name: person_data['name'])
+          Teacher.new(p_data['age'], p_data['specialization'], name: p_data['name'])
         end
       end
       @people.concat(people_data)
       people_data
-    rescue Errno::ENOENT => e
+    rescue Errno::ENOENT
       puts 'I hope these is your first time. Not data are founded! feel free to create a new person'
       []
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       puts 'Error parsing JSON file'
       []
     end
@@ -71,7 +71,7 @@ class Store
         Book.new(book['title'], book['author'])
       end
       @books.concat(books_data)
-    rescue Errno::ENOENT => e
+    rescue Errno::ENOENT
       puts 'No books are found! feel free to create books in the choice option'
       []
     rescue JSON::ParserError
@@ -85,12 +85,12 @@ class Store
     begin
       data = JSON.parse(File.read(file_path))
       rentals_data = data.map do |rental|
-        book = @books.find { |book| book.title == rental['book']['title'] && book.author == rental['book']['author'] }
-        person = @people.find { |p| p.age == rental['person']['age'] && p.name == rental['person']['name'] }
-        Rental.new(rental['date'], book, person)
+        rb = @books.find { |book| book.title == rental['book']['title'] && book.author == rental['book']['author'] }
+        renter = @people.find { |p| p.age == rental['person']['age'] && p.name == rental['person']['name'] }
+        Rental.new(rental['date'], rb, renter)
       end
       @rentals.concat(rentals_data)
-    rescue Errno::ENOENT => e
+    rescue Errno::ENOENT
       puts 'No rentals are found! fell free to create new rentals in the choice option'
       []
     rescue JSON::ParserError
