@@ -45,8 +45,7 @@ class App
   end
 
   def all_peoples
-    puts 'peoples'
-    @store.person.each do |person|
+    @store.people.each do |person|
       type = person.is_a?(Student) ? 'Student' : 'Teacher'
       puts "[#{type}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}]"
     end
@@ -92,11 +91,11 @@ class App
     book = @store.books[gets.chomp.to_i - 1]
 
     puts 'Select a person from the following list by number (not by id)'
-    @store.person.each_with_index do |person, index|
+    @store.people.each_with_index do |person, index|
       type = person.is_a?(Student) ? 'Student' : 'Teacher'
       puts "#{index + 1}) [#{type}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}]"
     end
-    person = @store.person[gets.chomp.to_i - 1]
+    person = @store.people[gets.chomp.to_i - 1]
 
     print 'Date: '
     date = gets.chomp
@@ -116,6 +115,7 @@ class App
   end
 
   def exit_app?
+    @store.save
     puts 'Thank you for using this app!'
     @exit = true
   end
