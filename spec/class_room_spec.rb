@@ -5,7 +5,7 @@ RSpec.describe ClassRoom do
   let(:stud1) { double('Student', 'to_hash': { name: 'Alice' }) }
   let(:stdu2) { double('Student', 'to_hash': { name: 'Paul' }) }
 
-  describe '#iniialize' do
+  describe '#initialize' do
     it 'sets the lable attribute ' do
       expect(class_room.label).to eq('Math')
     end
