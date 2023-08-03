@@ -8,7 +8,7 @@ class ClassRoom
 
   def to_hash
     {
-      lable: @lable,
+      lable: @label,
       students: @students.map(&:to_hash)
     }
   end
