@@ -11,12 +11,7 @@ RSpec.describe Student do
 
   describe ' -> to_hash()' do
     it 'returnes the hash object values of the student attribute' do
-      expect(student.to_hash).to eq({
-        type: 'student',
-        age: 23,
-        parent_permission: false,
-        name: 'paul'
-      })
-      end
+      expect(student.to_hash).to eq({ type: 'student', age: 23, parent_permission: false, name: 'paul' })
     end
+  end
 end

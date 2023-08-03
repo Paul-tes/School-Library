@@ -19,13 +19,7 @@ RSpec.describe ClassRoom do
     it 'returns a hash of the classroom attributes and each student' do
       class_room.students << stud1
       class_room.students << stdu2
-      expect(class_room.to_hash).to eq({
-        lable: 'Math',
-        students: [
-          { name: 'Alice' },
-          { name: 'Paul' }
-        ]
-      })
+      expect(class_room.to_hash).to eq({ lable: 'Math', students: [{ name: 'Alice' }, { name: 'Paul' }] })
     end
   end
 end
