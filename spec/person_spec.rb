@@ -35,3 +35,29 @@ RSpec.describe Person do
     end
   end
 end
+
+RSpec.describe CapitalizeDecorator do
+  let(:nameable) { double('Nameable') }
+  let(:decorator) { CapitalizeDecorator.new(nameable) }
+
+  describe ' => correct_name -> ' do
+    it 'capitalizes the correct_name of the wrapped nameable object' do
+      expect(nameable).to receive(:correct_name).and_return('paul tes')
+      expect(decorator.correct_name).to eq('Paul tes')
+    end
+  end
+end
+
+RSpec.describe TrimmerDecorator do
+  let(:nameable) { double('Nameable') }
+  let('decorator') { TrimmerDecorator.new(nameable) }
+
+  describe ' => correct_name ' do
+    context 'when the correct_name is longer that 10 characters' do
+      it 'returns the first 10 characters of the correct_name' do
+        expect(nameable).to receive(:correct_name).and_return('Paul Tesfaye Demmissie')
+        expect(decorator.correct_name).to eq('Paul Tesfa')
+      end
+    end
+  end
+end
